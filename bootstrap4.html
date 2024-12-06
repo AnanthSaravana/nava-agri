@@ -58,10 +58,19 @@
           .footer2{
           display: inline-block;
           }
+          #cart-items li{
+          margin-bottom: 15px;
+          }
+         .cart-btn{
+          margin-top: 20px;
+          }
+         .cart-total{ 
+          font-weight: bold; 
+          }
 
   </style>
 </head>
-<nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -74,6 +83,9 @@
           <li class="nav-item">
             <a class="nav-link" href="bootstrap2.html"><i class="fa-solid fa-seedling"></i> Soil Types</a>
           </li>
+          <li class="nav-item">
+            <button onclick="showCart()" class="btn btn-"><i class="fa-solid fa-cart-shopping"></i>View Cart (<span id="cart-count">0</span>)</button>
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
              <i class="fa-solid fa-list"></i> More</a>
@@ -83,6 +95,30 @@
             </ul>
           </li>
         </ul>
+     
+
+<!-- Cart Modal Structure -->
+<div class="modal" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="cartModalLabel">Your Cart</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <ul id="cart-items"></ul> <!-- Cart items will be displayed here -->
+          </div>
+          <div class="modal-footer">
+              <p id="cart-total"><strong>Total: ₹0</strong></p>
+              <button type="button" class="btn btn-primary" onclick="checkout()">Checkout</button>
+          </div>
+          
+      </div>
+  </div>
+</div>
+
+
+
         <img src="image2/NAVAtext logo.png" style="height: 70px; width: 250px; display: inline; margin-right: 21%; mix-blend-mode: darken;">
         <form class="d-flex" role="search">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -116,7 +152,7 @@
   <center><h1>Ploughshare</h1></center>
   <hr><br>
   <div class="card" style="padding-left: 10px; padding-right:10px;"><br>
-    <center><img src="image2/Rotavator 1.jpg" class="popout-image" alt="..." title="Capsicum"></center><br>
+    <center><img src="image2/Rotavator 1.jpg" class="popout-image" alt="..." title="Rotavator"></center><br>
     <div class="card-body">
       <h5 class="card-title" style="font-weight: bold;">Rotavator</h5>
         <p class="card-text">
@@ -125,7 +161,7 @@
     </div>
     <div class="card-footer">
         <button type="" class="btn" style="color: black; border:0.5px solid;" title="Save For Later"><i class="fa-regular fa-bookmark"></i></button>&nbsp;&nbsp;
-        <button class="add" title="Add">Add</button>
+        <button class="add" title="Add" onclick="addToCart(1, 'Rotavator', 15999)">Add</button>
       </div>
   </div>
   <div class="card" style="padding-left: 10px; padding-right:10px;"><br>
@@ -138,7 +174,7 @@
     </div>
     <div class="card-footer">
         <button type="" class="btn" style="color: black; border:0.5px solid;" title="Save For Later"><i class="fa-regular fa-bookmark"></i></button>&nbsp;&nbsp;
-        <button class="add" title="Add">Add</button>
+        <button class="add" title="Add" onclick="addToCart(2, 'Harrows', 15999)">Add</button>
       </div>
   </div>
   <div class="card" style="padding-left: 10px; padding-right:10px;"><br>
@@ -151,7 +187,7 @@
     </div>
     <div class="card-footer">
         <button type="" class="btn" style="color: black; border:0.5px solid;" title="Save For Later"><i class="fa-regular fa-bookmark"></i></button>&nbsp;&nbsp;
-        <button class="add" title="Add">Add</button>
+        <button class="add" title="Add" onclick="addToCart(3, 'Ploughs', 15999)">Add</button>
       </div>
   </div>
   <div class="card" style="padding-left: 10px; padding-right:10px;"><br>
@@ -164,7 +200,7 @@
     </div>
     <div class="card-footer">
         <button type="" class="btn" style="color: black; border:0.5px solid;" title="Save For Later"><i class="fa-regular fa-bookmark"></i></button>&nbsp;&nbsp;
-        <button class="add" title="Add">Add</button>
+        <button class="add" title="Add" onclick="addToCart(4, 'Harvester', 15999)">Add</button>
       </div>
   </div>
   <div class="card" style="padding-left: 10px; padding-right:10px;"><br>
@@ -177,7 +213,7 @@
     </div>
     <div class="card-footer">
         <button type="" class="btn" style="color: black; border:0.5px solid;" title="Save For Later"><i class="fa-regular fa-bookmark"></i></button>&nbsp;&nbsp;
-        <button class="add" title="Add">Add</button>
+        <button class="add" title="Add" onclick="addToCart(5, 'Cultivators', 15999)">Add</button>
       </div>
   </div>
   <div class="card" style="padding-left: 10px; padding-right:10px;"><br>
@@ -190,7 +226,7 @@
     </div>
     <div class="card-footer">
         <button type="" class="btn" style="color: black; border:0.5px solid;" title="Save For Later"><i class="fa-regular fa-bookmark"></i></button>&nbsp;&nbsp;
-        <button class="add" title="Add">Add</button>
+        <button class="add" title="Add" onclick="addToCart(6, 'Balers', 15999)">Add</button>
       </div>
   </div>
   <div class="card" style="padding-left: 10px; padding-right:10px;"><br>
@@ -203,7 +239,7 @@
     </div>
     <div class="card-footer">
         <button type="" class="btn" style="color: black; border:0.5px solid;" title="Save For Later"><i class="fa-regular fa-bookmark"></i></button>&nbsp;&nbsp;
-        <button class="add" title="Add">Add</button>
+        <button class="add" title="Add" onclick="addToCart(7, 'Trailers', 15999)">Add</button>
       </div>
   </div>
   <div class="card" style="padding-left: 10px; padding-right:10px;"><br>
@@ -216,20 +252,20 @@
     </div>
     <div class="card-footer">
         <button type="" class="btn" style="color: black; border:0.5px solid;" title="Save For Later"><i class="fa-regular fa-bookmark"></i></button>&nbsp;&nbsp;
-        <button class="add" title="Add">Add</button>
+        <button class="add" title="Add" onclick="addToCart(8, 'Rotary_Mulcher', 15999)">Add</button>
       </div>
   </div>
   <div class="card" style="padding-left: 10px; padding-right:10px;"><br>
     <center><img src="image2/pexels-zakhar-9.jpg" height="300px" class="popout-image" alt="..." title="Capsicum"></center><br>
     <div class="card-body">
-      <h5 class="card-title" style="font-weight: bold;">Trailers</h5>
+      <h5 class="card-title" style="font-weight: bold;">Zakhar</h5>
         <p class="card-text">
         <b>₹15999</b>
       </p>
     </div>
     <div class="card-footer">
         <button type="" class="btn" style="color: black; border:0.5px solid;" title="Save For Later"><i class="fa-regular fa-bookmark"></i></button>&nbsp;&nbsp;
-        <button class="add" title="Add">Add</button>
+        <button class="add" title="Add" onclick="addToCart(9, 'Zakhar', 15999)">Add</button>
       </div>
   </div>
   <br><hr><br><hr>
@@ -245,7 +281,7 @@
     </div>
     <div class="card-footer">
         <button type="" class="btn" style="color: black; border:0.5px solid;" title="Save For Later"><i class="fa-regular fa-bookmark"></i></button>&nbsp;&nbsp;
-        <button class="add" title="Add">Add</button>
+        <button class="add" title="Add" onclick="addToCart(10, 'champion manual', 2300)">Add</button>
       </div>
   </div>
   <div class="card" style="padding-left: 10px; padding-right:10px;"><br>
@@ -258,7 +294,7 @@
     </div>
     <div class="card-footer">
         <button type="" class="btn" style="color: black; border:0.5px solid;" title="Save For Later"><i class="fa-regular fa-bookmark"></i></button>&nbsp;&nbsp;
-        <button class="add" title="Add">Add</button>
+        <button class="add" title="Add" onclick="addToCart(11, '1pp-isi-Manual', 2400)">Add</button>
       </div>
   </div>
   <div class="card" style="padding-left: 10px; padding-right:10px;"><br>
@@ -271,7 +307,7 @@
     </div>
     <div class="card-footer">
         <button type="" class="btn" style="color: black; border:0.5px solid;" title="Save For Later"><i class="fa-regular fa-bookmark"></i></button>&nbsp;&nbsp;
-        <button class="add" title="Add">Add</button>
+        <button class="add" title="Add" onclick="addToCart(12, '3295_pro ss', 2500)">Add</button>
       </div>
   </div>
   <div class="card" style="padding-left: 10px; padding-right:10px;"><br>
@@ -284,7 +320,7 @@
     </div>
     <div class="card-footer">
         <button type="" class="btn" style="color: black; border:0.5px solid;" title="Save For Later"><i class="fa-regular fa-bookmark"></i></button>&nbsp;&nbsp;
-        <button class="add" title="Add">Add</button>
+        <button class="add" title="Add" onclick="addToCart(13, '2in 1 battery', 2550)">Add</button>
       </div>
   </div>
   <div class="card" style="padding-left: 10px; padding-right:10px;"><br>
@@ -297,7 +333,7 @@
     </div>
     <div class="card-footer">
         <button type="" class="btn" style="color: black; border:0.5px solid;" title="Save For Later"><i class="fa-regular fa-bookmark"></i></button>&nbsp;&nbsp;
-        <button class="add" title="Add">Add</button>
+        <button class="add" title="Add" onclick="addToCart(14, '3339 pro battery sprayer', 2600)">Add</button>
       </div>
   </div>
   <div class="card" style="padding-left: 10px; padding-right:10px;"><br>
@@ -310,7 +346,7 @@
     </div>
     <div class="card-footer">
         <button type="" class="btn" style="color: black; border:0.5px solid;" title="Save For Later"><i class="fa-regular fa-bookmark"></i></button>&nbsp;&nbsp;
-        <button class="add" title="Add">Add</button>
+        <button class="add" title="Add" onclick="addToCart(15, '1639 agrimate Htp sprayer', 2650)">Add</button>
       </div>
   </div>
   <div class="card" style="padding-left: 10px; padding-right:10px;"><br>
@@ -323,7 +359,7 @@
     </div>
     <div class="card-footer">
         <button type="" class="btn" style="color: black; border:0.5px solid;" title="Save For Later"><i class="fa-regular fa-bookmark"></i></button>&nbsp;&nbsp;
-        <button class="add" title="Add">Add</button>
+        <button class="add" title="Add" onclick="addToCart(16, 'HTP super sprayer', 7344)">Add</button>
       </div>
   </div>
 <div class="card" style="padding-left: 10px; padding-right:10px;"><br>
@@ -336,7 +372,7 @@
 </div>
 <div class="card-footer">
     <button type="" class="btn" style="color: black; border:0.5px solid;" title="Save For Later"><i class="fa-regular fa-bookmark"></i></button>&nbsp;&nbsp;
-    <button class="add" title="Add">Add</button>
+    <button class="add" title="Add" onclick="addToCart(17, 'Knapspack', 10980)">Add</button>
   </div>
 </div>
 <div class="card" style="padding-left: 10px; padding-right:10px;"><br>
@@ -349,7 +385,7 @@
   </div>
   <div class="card-footer">
       <button type="" class="btn" style="color: black; border:0.5px solid;" title="Save For Later"><i class="fa-regular fa-bookmark"></i></button>&nbsp;&nbsp;
-      <button class="add" title="Add">Add</button>
+      <button class="add" title="Add" onclick="addToCart(18, 'Knapsack Power', 14998)">Add</button>
     </div>
   </div>
   <br><hr><br><hr>
@@ -397,4 +433,136 @@
 <h4 style="color: green;">@Nava Agriculture</h4>
 </center>
 </footer>
+</html>
+
+
+      <!-- Bootstrap JS and jQuery -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
   
+      <script>
+      // Show cart modal
+      function showCart(editable = true) {
+          displayCartItems(editable);
+          let cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
+          cartModal.show();
+      }
+      
+      // Display cart items with editable quantity buttons
+      function displayCartItems(editable = true) {
+          let cart = JSON.parse(localStorage.getItem('cart')) || [];
+          let cartItemsList = document.getElementById('cart-items');
+          cartItemsList.innerHTML = '';  // Clear previous items
+      
+          // If cart is empty
+          if (cart.length === 0) {
+              cartItemsList.innerHTML = '<li>Your cart is empty.</li>';
+          } else {
+              // Loop through the cart and add each item with quantity control if editable
+              cart.forEach((item, index) => {
+                  let listItem = document.createElement('li');
+                  listItem.innerHTML = `
+                      <div>
+                          <p><strong>${item.name}</strong></p>
+                          <p>Price: ₹${item.price}</p>
+                          <p>
+                              Quantity: 
+                              ${editable ? `
+                                  <button onclick="changeQuantity(${index}, -1)">-</button>
+                                  <span>${item.quantity}</span>
+                                  <button onclick="changeQuantity(${index}, 1)">+</button>
+                              ` : `<span>${item.quantity}</span>`}
+                          </p>
+                          <p><strong>Total:</strong> ₹${item.price * item.quantity}</p>
+                      </div>`;
+                  cartItemsList.appendChild(listItem);
+              });
+          }
+      
+          // Update the total price in the modal footer
+          updateTotalPrice();
+      }
+      
+      // Function to update the total price
+      function updateTotalPrice() {
+          let cart = JSON.parse(localStorage.getItem('cart')) || [];
+          let totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+          document.getElementById('cart-total').innerHTML = `<strong>Total: ₹${totalPrice}</strong>`;
+      }
+      
+      // Function to update cart count
+      function updateCartCount() {
+          let cart = JSON.parse(localStorage.getItem('cart')) || [];
+          let cartCount = cart.reduce((count, item) => count + item.quantity, 0);
+          document.getElementById('cart-count').textContent = cartCount;
+      }
+
+
+      function changeQuantity(index, change) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Get the current quantity of the item
+    let currentQuantity = cart[index].quantity;
+
+    // Calculate the new quantity
+    let newQuantity = currentQuantity + change;
+
+    // If the new quantity is less than or equal to 0, remove the item from the cart
+    if (newQuantity <= 0) {
+        cart.splice(index, 1); // Remove the item from the cart
+        alert('Item has been removed from the cart.');
+    } else {
+        // Update the quantity
+        cart[index].quantity = newQuantity;
+    }
+
+    // Save the updated cart to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Refresh cart display with editable mode
+    displayCartItems(true);
+    updateCartCount();   // Update cart count display
+    updateTotalPrice();  // Recalculate total price
+}
+
+
+      
+      // Function to add an item to the cart
+      function addToCart(id, name, price) {
+          let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      
+          // Check if the item already exists in the cart
+          let existingItem = cart.find(item => item.id === id);
+          if (existingItem) {
+              // If item exists, update the quantity
+              existingItem.quantity += 1;
+          } else {
+              // If item doesn’t exist, add it to the cart with a quantity of 1
+              cart.push({ id, name, price, quantity: 1 });
+          }
+      
+          // Save updated cart to localStorage
+          localStorage.setItem('cart', JSON.stringify(cart));
+      
+          // Update cart count and show confirmation
+          updateCartCount();
+          alert(`${name} has been added to your cart.`);
+      }
+      
+      // Checkout functionality
+      function checkout() {
+          let cart = JSON.parse(localStorage.getItem('cart')) || [];
+          if (cart.length === 0) {
+              alert('Your cart is empty. Please add items before proceeding to checkout.');
+          } else {
+              alert('Proceeding to checkout...');
+              // Implement checkout logic here (e.g., redirecting or sending data to the server)
+          }
+      }
+      
+      // Initial call to update cart count when the page loads
+      document.addEventListener('DOMContentLoaded', updateCartCount);
+
+    </script>
+      
